@@ -1,9 +1,6 @@
 import 'package:background_location_tracer/CurrentData.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'dart:async';
-
-import 'package:flutter/services.dart';
 import 'package:background_location_tracer/background_location_tracer.dart';
 
 void main() {
@@ -16,32 +13,16 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String _platformVersion = 'Unknown';
 
   @override
   void initState() {
     super.initState();
-    initPlatformState();
     BackgroundLocationTracer.registerOnLocationUpdateListener((CurrentData value) {
       setState(() {
         _currentLat = value.latitude;
         _currentLng = value.longitude;
         _currentSpeed = value.speed;
       });
-    });
-  }
-
-  Future<void> initPlatformState() async {
-    String platformVersion;
-    try {
-      platformVersion = await BackgroundLocationTracer.platformVersion;
-    } on PlatformException {
-      platformVersion = 'Failed to get platform version.';
-    }
-    if (!mounted) return;
-
-    setState(() {
-      _platformVersion = platformVersion;
     });
   }
 
@@ -95,7 +76,6 @@ class _MyAppState extends State<MyApp> {
         body: Center(
           child: Column(
             children: [
-              Text('Running on: $_platformVersion\n'),
               RaisedButton(
                 onPressed: () {
                   _startStopClick();
