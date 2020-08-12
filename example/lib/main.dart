@@ -1,5 +1,4 @@
 import 'package:background_location_tracer/CurrentData.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:background_location_tracer/background_location_tracer.dart';
 
@@ -22,6 +21,10 @@ class _MyAppState extends State<MyApp> {
         _currentLat = value.latitude;
         _currentLng = value.longitude;
         _currentSpeed = value.speed;
+        _currentAlt = value.altitude;
+        _currentBearing = value.bearing;
+        _currentAccuracy = value.accuracy;
+        _currentTime = value.timeAtMillis;
       });
     });
   }
@@ -30,6 +33,10 @@ class _MyAppState extends State<MyApp> {
   double _currentSpeed = 0.0;
   double _currentLat = 0.0;
   double _currentLng = 0.0;
+  double _currentAlt = 0.0;
+  double _currentBearing = 0.0;
+  double _currentAccuracy = 0.0;
+  int _currentTime = 0;
 
 
   void _startService() async {
@@ -89,8 +96,11 @@ class _MyAppState extends State<MyApp> {
                 child: Text('resume or pause service'),
               ),
               Text(_resultMessage),
-              Text('current position: $_currentLat, $_currentLng'),
+              Text('current position: $_currentLat, $_currentLng, $_currentAlt'),
               Text('current speed = $_currentSpeed'),
+              Text('current bearing = $_currentBearing'),
+              Text('current accuracy = $_currentAccuracy'),
+              Text('current time = $_currentTime'),
             ],
           ),
         ),

@@ -13,7 +13,6 @@ import io.flutter.plugin.common.MethodChannel.Result
 /** BackgroundLocationTracerPlugin */
 class BackgroundLocationTracerPlugin: FlutterPlugin, MethodCallHandler {
 
-
   private lateinit var methodChannel : MethodChannel
   private lateinit var streamChannel: EventChannel
   private lateinit var streamSubscription: EventChannel.StreamHandler

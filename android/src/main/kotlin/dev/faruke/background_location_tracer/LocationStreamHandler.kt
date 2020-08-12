@@ -24,7 +24,11 @@ class LocationStreamHandler : EventChannel.StreamHandler {
                 val map: HashMap<String, Any?> = hashMapOf(
                         Pair("currentPositionLat", currentPositionLat),
                         Pair("currentPositionLng", currentPositionLng),
-                        Pair("currentSpeed", currentSpeed)
+                        Pair("currentAltitude", location.altitude),
+                        Pair("currentSpeed", location.speed.toDouble()),
+                        Pair("currentBearing", location.bearing.toDouble()),
+                        Pair("currentAccuracy", location.accuracy.toDouble()),
+                        Pair("currentTimeAtMillis", location.time)
                 )
 
                 events?.success(map)

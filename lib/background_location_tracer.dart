@@ -88,7 +88,11 @@ class BackgroundLocationTracer {
       CurrentData data = CurrentData(
         latitude: event['currentPositionLat'],
         longitude: event['currentPositionLng'],
-        speed: event['currentSpeed']
+        altitude: event['currentAltitude'],
+        speed: event['currentSpeed'],
+        bearing: event['currentBearing'],
+        accuracy: event['currentAccuracy'],
+        timeAtMillis: event['currentTimeAtMillis'],
       );
       if (_onLocationUpdate != null)
         _onLocationUpdate(data);

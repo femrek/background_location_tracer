@@ -30,6 +30,7 @@ class LocationService : Service() {
         startForeground()
         service = this
         resumeService()
+        println("service starting")
 
         return START_STICKY
     }
@@ -87,7 +88,7 @@ class LocationService : Service() {
         var notificationLargeIcon: Bitmap? = null
 
         const val CHANNEL_ID = "notificationChannelID"
-        private const val LOCATION_INTERVAL: Long = 1000
+        private const val LOCATION_INTERVAL: Long = 3000
         private const val LOCATION_DISTANCE: Float = 0f
     }
 
