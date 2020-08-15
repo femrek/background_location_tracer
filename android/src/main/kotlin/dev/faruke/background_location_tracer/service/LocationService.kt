@@ -76,11 +76,11 @@ class LocationService : Service() {
 
         var isRunning: Boolean = false
 
-        val pathNodes: MutableList<Map<String, Any?>> = mutableListOf()
+        val pathNodes: MutableList<HashMap<String, Any?>> = mutableListOf()
 
         //var currentPositionLat: Double? = null
         //var currentPositionLng: Double? = null
-        //var currentSpeed: Double = 0.0
+        var lastSpeed: Double = 0.0
 
         var notificationSmallIcon: Int = android.R.drawable.sym_def_app_icon
         var notificationLargeIcon: Bitmap? = null

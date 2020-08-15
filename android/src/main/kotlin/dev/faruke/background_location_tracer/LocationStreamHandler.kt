@@ -2,6 +2,7 @@ package dev.faruke.background_location_tracer
 
 import android.location.LocationListener
 import android.os.Bundle
+import dev.faruke.background_location_tracer.service.LocationService.Companion.lastSpeed
 import dev.faruke.background_location_tracer.service.LocationService.Companion.locationListener
 import dev.faruke.background_location_tracer.service.LocationService.Companion.pathNodes
 import dev.faruke.background_location_tracer.service.LocationService.Companion.service
@@ -25,7 +26,11 @@ class LocationStreamHandler : EventChannel.StreamHandler {
                         Pair("currentTimeAtMillis", location.time)
                 )
 
-                pathNodes.add(map)
+                if (location.speed != 0.0f && lastSpeed != 0.0) {
+                    pathNodes.add(map)
+                }
+
+                lastSpeed = location.speed.toDouble()
 
                 events?.success(map)
             }
