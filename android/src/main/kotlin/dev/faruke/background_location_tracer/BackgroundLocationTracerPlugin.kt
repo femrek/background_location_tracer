@@ -59,9 +59,6 @@ class BackgroundLocationTracerPlugin: FlutterPlugin, MethodCallHandler {
       "isServiceRunning" -> {
         result.success(BackgroundLocationTracer.isServiceRunning())
       }
-      "getCurrentSpeed" -> {
-        result.success(BackgroundLocationTracer.getCurrentSpeed())
-      }
       "getPathNodes" -> {
         result.success(BackgroundLocationTracer.getPathNodes())
       }

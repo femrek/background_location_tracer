@@ -16,8 +16,6 @@ import android.os.IBinder
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationCompat.PRIORITY_MIN
-import dev.faruke.background_location_tracer.LocationStreamHandler
-import dev.faruke.background_location_tracer.model.CurrentData
 
 
 class LocationService : Service() {
@@ -78,17 +76,17 @@ class LocationService : Service() {
 
         var isRunning: Boolean = false
 
-        val pathNodes: MutableSet<CurrentData> = mutableSetOf()
+        val pathNodes: MutableList<Map<String, Any?>> = mutableListOf()
 
-        var currentPositionLat: Double? = null
-        var currentPositionLng: Double? = null
-        var currentSpeed: Double = 0.0
+        //var currentPositionLat: Double? = null
+        //var currentPositionLng: Double? = null
+        //var currentSpeed: Double = 0.0
 
         var notificationSmallIcon: Int = android.R.drawable.sym_def_app_icon
         var notificationLargeIcon: Bitmap? = null
 
         const val CHANNEL_ID = "notificationChannelID"
-        private const val LOCATION_INTERVAL: Long = 3000
+        private const val LOCATION_INTERVAL: Long = 2000
         private const val LOCATION_DISTANCE: Float = 0f
     }
 

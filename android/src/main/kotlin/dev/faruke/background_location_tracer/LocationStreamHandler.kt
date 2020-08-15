@@ -2,10 +2,8 @@ package dev.faruke.background_location_tracer
 
 import android.location.LocationListener
 import android.os.Bundle
-import dev.faruke.background_location_tracer.service.LocationService.Companion.currentPositionLat
-import dev.faruke.background_location_tracer.service.LocationService.Companion.currentPositionLng
-import dev.faruke.background_location_tracer.service.LocationService.Companion.currentSpeed
 import dev.faruke.background_location_tracer.service.LocationService.Companion.locationListener
+import dev.faruke.background_location_tracer.service.LocationService.Companion.pathNodes
 import dev.faruke.background_location_tracer.service.LocationService.Companion.service
 import io.flutter.plugin.common.EventChannel
 
@@ -17,13 +15,9 @@ class LocationStreamHandler : EventChannel.StreamHandler {
             override fun onLocationChanged(location: android.location.Location) {
                 service?.updateNotification(location)
 
-                currentPositionLat = location.latitude
-                currentPositionLng = location.longitude
-                currentSpeed = location.speed.toDouble()
-
                 val map: HashMap<String, Any?> = hashMapOf(
-                        Pair("currentPositionLat", currentPositionLat),
-                        Pair("currentPositionLng", currentPositionLng),
+                        Pair("currentPositionLat", location.latitude),
+                        Pair("currentPositionLng", location.longitude),
                         Pair("currentAltitude", location.altitude),
                         Pair("currentSpeed", location.speed.toDouble()),
                         Pair("currentBearing", location.bearing.toDouble()),
@@ -31,12 +25,13 @@ class LocationStreamHandler : EventChannel.StreamHandler {
                         Pair("currentTimeAtMillis", location.time)
                 )
 
-                events?.success(map)
+                pathNodes.add(map)
 
+                events?.success(map)
             }
 
-
             override fun onStatusChanged(provider: String, status: Int, extras: Bundle) {
+                //events?.success(status)
             }
 
             override fun onProviderEnabled(provider: String) {

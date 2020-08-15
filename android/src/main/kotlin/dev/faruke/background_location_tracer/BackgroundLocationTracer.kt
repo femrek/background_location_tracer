@@ -3,9 +3,7 @@ package dev.faruke.background_location_tracer
 import android.content.Context
 import android.content.Intent
 import android.os.Build
-import dev.faruke.background_location_tracer.model.CurrentData
 import dev.faruke.background_location_tracer.service.LocationService
-import dev.faruke.background_location_tracer.service.LocationService.Companion.currentSpeed
 import dev.faruke.background_location_tracer.service.LocationService.Companion.isRunning
 import dev.faruke.background_location_tracer.service.LocationService.Companion.pathNodes
 import dev.faruke.background_location_tracer.service.LocationService.Companion.service
@@ -58,11 +56,7 @@ abstract class BackgroundLocationTracer {
         }
 
 
-        fun getCurrentSpeed() : Double {
-            return currentSpeed
-        }
-
-        fun getPathNodes() : Set<CurrentData> {
+        fun getPathNodes() : List<Map<String, Any?>> {
             return pathNodes
         }
 

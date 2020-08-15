@@ -1,4 +1,3 @@
-import 'package:background_location_tracer/CurrentData.dart';
 import 'package:flutter/material.dart';
 import 'package:background_location_tracer/background_location_tracer.dart';
 
@@ -12,6 +11,8 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+
+  Future<Set<CurrentData>> _pathNodesFuture;
 
   @override
   void initState() {
@@ -72,6 +73,11 @@ class _MyAppState extends State<MyApp> {
     }
   }
 
+  Future<Set<CurrentData>> _updatePathNodes() async {
+    Set<CurrentData> set = await BackgroundLocationTracer.pathNodes;
+    return set;
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -101,6 +107,42 @@ class _MyAppState extends State<MyApp> {
               Text('current bearing = $_currentBearing'),
               Text('current accuracy = $_currentAccuracy'),
               Text('current time = $_currentTime'),
+              Divider(),
+              RaisedButton(
+                onPressed: () {
+                  setState(() {
+                    _pathNodesFuture = _updatePathNodes();
+                  });
+                },
+                child: Text('get path nodes'),
+              ),
+              Expanded(
+                child: FutureBuilder(
+                  future: _pathNodesFuture,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return ListView.builder(
+                        itemBuilder: (context, index) {
+                          return Container(
+                            padding: EdgeInsets.all(8),
+                            child: Text(
+                              (snapshot.data as Set<CurrentData>).elementAt(index).timeAtMillis.toString(),
+                            ),
+                          );
+                        },
+                        itemCount: (snapshot.data as Set).length,
+                      );
+                    }
+                    if (snapshot.hasError) {
+                      return Text(
+                        snapshot.error.toString(),
+                      );
+                    }
+                    return CircularProgressIndicator();
+                  },
+                ),
+              ),
+
             ],
           ),
         ),

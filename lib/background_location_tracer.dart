@@ -6,6 +6,8 @@ import 'package:flutter/services.dart';
 
 import 'CurrentData.dart';
 
+export 'CurrentData.dart';
+
 class BackgroundLocationTracer {
   static const MethodChannel _channel =
       const MethodChannel('background_location_tracer');
@@ -49,14 +51,30 @@ class BackgroundLocationTracer {
   }
 
 
-  static Future<Double> get currentSpeed async {
-    final Double currentSpeed = await _channel.invokeMethod("getCurrentSpeed");
-    return currentSpeed;
-  }
+  static Future<Set<CurrentData>> get pathNodes async {
+    final pathNodesInput = await _channel.invokeMethod("getPathNodes");
+    Set<CurrentData> pathNodesResult = Set();
 
-  static Future<Double> get pathNodes async {
-    final Double pathNodes = await _channel.invokeMethod("getPathNodes");
-    return pathNodes;
+    if (pathNodesInput is List) {
+      for (Map pathNode in pathNodesInput) {
+        CurrentData data = CurrentData(
+          latitude: pathNode['currentPositionLat'],
+          longitude: pathNode['currentPositionLng'],
+          altitude: pathNode['currentAltitude'],
+          speed: pathNode['currentSpeed'],
+          bearing: pathNode['currentBearing'],
+          accuracy: pathNode['currentAccuracy'],
+          timeAtMillis: pathNode['currentTimeAtMillis'],
+        );
+        pathNodesResult.add(data);
+      }
+      return pathNodesResult;
+    } else {
+      print(pathNodesInput.runtimeType.toString());
+      Set<CurrentData> errorList = Set();
+      errorList.add(CurrentData(latitude: 0));
+      return errorList;
+    }
   }
 
 

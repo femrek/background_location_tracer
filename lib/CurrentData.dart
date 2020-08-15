@@ -18,4 +18,15 @@ class CurrentData {
   final double bearing;
   final double accuracy;
   final int timeAtMillis;
+
+  @override
+  String toString() {
+    return "latitude: $latitude | " +
+    "longitude: $longitude | " +
+    "altitude: $altitude | " +
+    "speed: $speed | " +
+    "bearing: $bearing | " +
+    "accuracy: $accuracy | " +
+    "timeAtMillis: $timeAtMillis";
+  }
 }
