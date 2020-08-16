@@ -2,6 +2,7 @@ package dev.faruke.background_location_tracer
 
 import androidx.annotation.NonNull;
 import dev.faruke.background_location_tracer.service.LocationService.Companion.context
+import dev.faruke.background_location_tracer.BackgroundLocationTracer
 
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.EventChannel
@@ -28,13 +29,13 @@ class BackgroundLocationTracerPlugin: FlutterPlugin, MethodCallHandler {
     context = flutterPluginBinding.applicationContext
   }
 
-  /*companion object {
+  companion object {
     @JvmStatic
     fun registerWith(registrar: Registrar) {
       val channel = MethodChannel(registrar.messenger(), "background_location_tracer")
       channel.setMethodCallHandler(BackgroundLocationTracerPlugin())
     }
-  }*/
+  }
   
 
   override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
