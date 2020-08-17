@@ -17,6 +17,8 @@ class LocationStreamHandler : EventChannel.StreamHandler {
             override fun onLocationChanged(location: android.location.Location) {
                 service?.updateNotification(location)
 
+                val isAddToPathNodes = ((location.speed != 0.0f || lastSpeed != 0.0) || pathNodes.size == 0) && isRunning
+
                 val map: HashMap<String, Any?> = hashMapOf(
                         Pair("currentPositionLat", location.latitude),
                         Pair("currentPositionLng", location.longitude),
@@ -24,10 +26,11 @@ class LocationStreamHandler : EventChannel.StreamHandler {
                         Pair("currentSpeed", location.speed.toDouble()),
                         Pair("currentBearing", location.bearing.toDouble()),
                         Pair("currentAccuracy", location.accuracy.toDouble()),
-                        Pair("currentTimeAtMillis", location.time)
+                        Pair("currentTimeAtMillis", location.time),
+                        Pair("isAddToPathNodes", isAddToPathNodes)
                 )
 
-                if (((location.speed != 0.0f || lastSpeed != 0.0) || pathNodes.size == 0) && isRunning) {
+                if (isAddToPathNodes) {
                     pathNodes.add(map)
                 }
 

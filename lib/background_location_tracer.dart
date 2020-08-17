@@ -109,6 +109,7 @@ class BackgroundLocationTracer {
         bearing: event['currentBearing'],
         accuracy: event['currentAccuracy'],
         timeAtMillis: event['currentTimeAtMillis'],
+        isAddToPathNodes: event['isAddToPathNodes'],
       );
       if (_onLocationUpdate != null)
         _onLocationUpdate(data);

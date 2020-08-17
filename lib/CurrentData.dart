@@ -9,6 +9,7 @@ class CurrentData {
     this.bearing,
     this.accuracy,
     this.timeAtMillis,
+    this.isAddToPathNodes,
   });
 
   final double latitude;
@@ -18,6 +19,7 @@ class CurrentData {
   final double bearing;
   final double accuracy;
   final int timeAtMillis;
+  final bool isAddToPathNodes;
 
   @override
   String toString() {
@@ -27,6 +29,8 @@ class CurrentData {
     "speed: $speed | " +
     "bearing: $bearing | " +
     "accuracy: $accuracy | " +
-    "timeAtMillis: $timeAtMillis";
+    "timeAtMillis: $timeAtMillis | " +
+    "isAddToPathNodes: $isAddToPathNodes"
+    ;
   }
 }
