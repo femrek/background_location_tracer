@@ -26,7 +26,7 @@ class LocationStreamHandler : EventChannel.StreamHandler {
                         Pair("currentTimeAtMillis", location.time)
                 )
 
-                if (location.speed != 0.0f && lastSpeed != 0.0) {
+                if ((location.speed != 0.0f || lastSpeed != 0.0) || pathNodes.size == 0) {
                     pathNodes.add(map)
                 }
 

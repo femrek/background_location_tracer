@@ -1,6 +1,4 @@
 import 'dart:async';
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -16,7 +14,7 @@ class BackgroundLocationTracer {
   static Future<String> get startService async {
     final String errorMessage = await _channel.invokeMethod('startService');
     if (errorMessage == null) {
-      _enableLocationListener();
+      enableLocationListener();
     }
     return errorMessage;
   }
@@ -24,7 +22,7 @@ class BackgroundLocationTracer {
   static Future<String> get stopService async {
     final String errorMessage = await _channel.invokeMethod('stopService');
     if (errorMessage == null) {
-      _disableLocationListener();
+      disableLocationListener();
     }
     return errorMessage;
   }
@@ -89,12 +87,12 @@ class BackgroundLocationTracer {
     const EventChannel('background_location_tracer_stream');
   static StreamSubscription _locationSubscription;
 
-  static void _enableLocationListener() {
+  static void enableLocationListener() {
     if (_locationSubscription == null)
       _locationSubscription = _streamChannel.receiveBroadcastStream().listen(_streamListener);
   }
 
-  static void _disableLocationListener() {
+  static void disableLocationListener() {
     if (_locationSubscription != null) {
       _locationSubscription.cancel();
       _locationSubscription = null;

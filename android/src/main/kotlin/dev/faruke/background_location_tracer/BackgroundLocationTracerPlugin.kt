@@ -30,11 +30,11 @@ class BackgroundLocationTracerPlugin: FlutterPlugin, MethodCallHandler {
   }
 
   companion object {
-    @JvmStatic
+    /*@JvmStatic
     fun registerWith(registrar: Registrar) {
       val channel = MethodChannel(registrar.messenger(), "background_location_tracer")
       channel.setMethodCallHandler(BackgroundLocationTracerPlugin())
-    }
+    }*/
   }
   
 
