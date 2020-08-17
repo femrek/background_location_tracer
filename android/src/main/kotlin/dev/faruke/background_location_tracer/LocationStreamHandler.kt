@@ -6,6 +6,7 @@ import dev.faruke.background_location_tracer.service.LocationService.Companion.l
 import dev.faruke.background_location_tracer.service.LocationService.Companion.locationListener
 import dev.faruke.background_location_tracer.service.LocationService.Companion.pathNodes
 import dev.faruke.background_location_tracer.service.LocationService.Companion.service
+import dev.faruke.background_location_tracer.service.LocationService.Companion.isRunning
 import io.flutter.plugin.common.EventChannel
 
 class LocationStreamHandler : EventChannel.StreamHandler {
@@ -26,7 +27,7 @@ class LocationStreamHandler : EventChannel.StreamHandler {
                         Pair("currentTimeAtMillis", location.time)
                 )
 
-                if ((location.speed != 0.0f || lastSpeed != 0.0) || pathNodes.size == 0) {
+                if (((location.speed != 0.0f || lastSpeed != 0.0) || pathNodes.size == 0) && isRunning) {
                     pathNodes.add(map)
                 }
 
