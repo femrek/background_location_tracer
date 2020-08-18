@@ -1,8 +1,7 @@
 package dev.faruke.background_location_tracer
 
 import androidx.annotation.NonNull;
-import dev.faruke.background_location_tracer.service.LocationService.Companion.context
-import dev.faruke.background_location_tracer.BackgroundLocationTracer
+import dev.faruke.background_location_tracer.LocationService.Companion.context
 
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.EventChannel

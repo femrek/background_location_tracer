@@ -2,11 +2,11 @@ package dev.faruke.background_location_tracer
 
 import android.location.LocationListener
 import android.os.Bundle
-import dev.faruke.background_location_tracer.service.LocationService.Companion.lastSpeed
-import dev.faruke.background_location_tracer.service.LocationService.Companion.locationListener
-import dev.faruke.background_location_tracer.service.LocationService.Companion.pathNodes
-import dev.faruke.background_location_tracer.service.LocationService.Companion.service
-import dev.faruke.background_location_tracer.service.LocationService.Companion.isRunning
+import dev.faruke.background_location_tracer.LocationService.Companion.lastSpeed
+import dev.faruke.background_location_tracer.LocationService.Companion.locationListener
+import dev.faruke.background_location_tracer.LocationService.Companion.pathNodes
+import dev.faruke.background_location_tracer.LocationService.Companion.service
+import dev.faruke.background_location_tracer.LocationService.Companion.isRunning
 import io.flutter.plugin.common.EventChannel
 
 class LocationStreamHandler : EventChannel.StreamHandler {

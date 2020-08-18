@@ -3,10 +3,9 @@ package dev.faruke.background_location_tracer
 import android.content.Context
 import android.content.Intent
 import android.os.Build
-import dev.faruke.background_location_tracer.service.LocationService
-import dev.faruke.background_location_tracer.service.LocationService.Companion.isRunning
-import dev.faruke.background_location_tracer.service.LocationService.Companion.pathNodes
-import dev.faruke.background_location_tracer.service.LocationService.Companion.service
+import dev.faruke.background_location_tracer.LocationService.Companion.isRunning
+import dev.faruke.background_location_tracer.LocationService.Companion.pathNodes
+import dev.faruke.background_location_tracer.LocationService.Companion.service
 
 abstract class BackgroundLocationTracer {
 

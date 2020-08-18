@@ -1,4 +1,4 @@
-package dev.faruke.background_location_tracer.service
+package dev.faruke.background_location_tracer
 
 import android.app.Notification
 import android.app.NotificationChannel
@@ -41,6 +41,7 @@ class LocationService : Service() {
 
     fun stopService() {
         service = null
+        pathNodes.clear()
         pauseService()
         stopSelf()
     }
