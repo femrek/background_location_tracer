@@ -2,9 +2,11 @@
   package="dev.faruke.background_location_tracer">
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <application>
-        <service android:name=".LocationService" />
+        <service
+            android:name=".LocationService" />
     </application>
 </manifest>

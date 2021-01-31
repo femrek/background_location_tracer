@@ -50,6 +50,7 @@ class LocationService : Service() {
         isRunning = true
 
         if (locationListener == null) {
+            println("location listener is null")
             return
         }
 
@@ -58,10 +59,13 @@ class LocationService : Service() {
             mLocationManager!!.requestLocationUpdates(
                     LocationManager.GPS_PROVIDER, LOCATION_INTERVAL, LOCATION_DISTANCE,
                     locationListener!!)
-        } catch (ex: SecurityException) {
         } catch (ex: IllegalArgumentException) {
+            println("location cannot listen")
+            println(ex)
         }
     }
+
+
 
     fun pauseService() {
         isRunning = false

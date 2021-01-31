@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:background_location_tracer/background_location_tracer.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 void main() {
   runApp(MyApp());
@@ -29,6 +30,20 @@ class _MyAppState extends State<MyApp> {
       });
     });
   }
+
+  Future permission() async {
+    if (!await Permission.locationAlways.isGranted) {
+      Permission.locationAlways.request().then((PermissionStatus status) {
+        if (status.isGranted){
+          havePermission = true;
+        }
+      });
+    } else {
+      havePermission = true;
+    }
+  }
+
+  bool havePermission = false;
 
   String _resultMessage = "";
   double _currentSpeed = 0.0;
@@ -89,6 +104,10 @@ class _MyAppState extends State<MyApp> {
         body: Center(
           child: Column(
             children: [
+              Visibility(
+                visible: !havePermission,
+                child: Text("don't have gps permission"),
+              ),
               RaisedButton(
                 onPressed: () {
                   _startStopClick();

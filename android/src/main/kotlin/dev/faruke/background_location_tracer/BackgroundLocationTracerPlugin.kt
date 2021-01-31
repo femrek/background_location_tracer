@@ -9,6 +9,7 @@ import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
+import io.flutter.plugin.common.PluginRegistry
 
 /** BackgroundLocationTracerPlugin */
 class BackgroundLocationTracerPlugin: FlutterPlugin, MethodCallHandler {
@@ -18,22 +19,24 @@ class BackgroundLocationTracerPlugin: FlutterPlugin, MethodCallHandler {
   private lateinit var streamSubscription: EventChannel.StreamHandler
 
   override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
-    methodChannel = MethodChannel(flutterPluginBinding.getFlutterEngine().getDartExecutor(), "background_location_tracer")
+    methodChannel = MethodChannel(flutterPluginBinding.binaryMessenger, CHANNEL_NAME)
     methodChannel.setMethodCallHandler(this);
 
     streamSubscription = LocationStreamHandler()
-    streamChannel = EventChannel(flutterPluginBinding.getFlutterEngine().getDartExecutor(), "background_location_tracer_stream")
+    streamChannel = EventChannel(flutterPluginBinding.binaryMessenger, CHANNEL_NAME_STREAM)
     streamChannel.setStreamHandler(streamSubscription)
 
     context = flutterPluginBinding.applicationContext
   }
 
   companion object {
-    /*@JvmStatic
-    fun registerWith(registrar: Registrar) {
+    const val CHANNEL_NAME = "background_location_tracer"
+    const val CHANNEL_NAME_STREAM = "background_location_tracer_stream"
+    @JvmStatic
+    fun registerWith(registrar: PluginRegistry.Registrar) {
       val channel = MethodChannel(registrar.messenger(), "background_location_tracer")
       channel.setMethodCallHandler(BackgroundLocationTracerPlugin())
-    }*/
+    }
   }
   
 
